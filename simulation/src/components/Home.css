@@ -1,0 +1,35 @@
+
+
+.mapPage{
+    z-index: -1;
+    width: 70vw;
+    height: auto; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0%;
+    margin-left: 30vw;
+    padding: 0%;
+}
+.dataPage{
+    width: 30%;
+    height: 100%;
+    position: absolute;
+    top: 0px; 
+    left: 0px; 
+    padding: 0px;
+    z-index: 100; 
+    overflow-y: auto;
+}
+.cardPage{
+    width: 70%;
+    height: 20%;
+    position: absolute;
+    top: 80vh; 
+    left: 30vw;
+    padding: 5px;
+    z-index: 100;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    margin-bottom: 5%;
+}
