@@ -1,8 +1,8 @@
 {
+  "homepage": "https://trifyev.github.io/simulationdashboard",
   "name": "simulation",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://nithyaatrify.github.io/SimulationDashboard",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
