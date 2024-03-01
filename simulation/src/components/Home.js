@@ -24,13 +24,13 @@ const Home = () => {
   return (
     <div>
       <MarkerProvider>
-        <JourneyProvider>
+        <JourneyProvider id={clickData?.ID}>
       <div className="mapPage">
-        {selectedOption === null && <Locations selectedOption={selectedOption} />}
-        {selectedOption === "SwapStation" && <SwapStation selectedOption={selectedOption} />}
+        {selectedOption === null && <Locations click={handleClickDataChange} selectedOption={selectedOption} />}
+        {selectedOption === "SwapStation" && <SwapStation click={handleClickDataChange} selectedOption={selectedOption} />}
         {selectedOption === "Vehicle" && <Vehicle click={handleClickDataChange}  selectedOption={selectedOption} />}
-        {selectedOption === "Journey" && <Journey  selectedOption={selectedOption} />}
-        {selectedOption === "Locations" && <Locations  selectedOption={selectedOption} />}
+        {selectedOption === "Journey" && <Journey  selectedOption={selectedOption} click={handleClickDataChange} clickData={clickData} />}
+        {selectedOption === "Locations" && <Locations click={handleClickDataChange}  selectedOption={selectedOption} />}
       </div>
       <div className="dataPage">
               <SideCard  click={handleClickDataChange} clickData={clickData}/>

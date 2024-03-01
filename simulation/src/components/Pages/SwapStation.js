@@ -3,13 +3,17 @@ import axios from 'axios';
 import Map from '../map/Map';
 
 
-const SwapStation = ({ selectedOption }) => {
+const SwapStation = ({ click, selectedOption,}) => {
 
   const [data, setData] = useState([]);
   const [markers, setMarkers] = useState([]);
   const [defaultCenter, setDefaultCenter] = useState({ lat: 12.9716, lng: 77.5946 });
   const [defaultZoom, setDefaultZoom] = useState(12);
-  
+
+  useEffect(()=> {
+    click(null);
+  },[])
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,7 +21,7 @@ const SwapStation = ({ selectedOption }) => {
         const response = await axios.get("https://dev-api.trify.us/api/admin/servicestation/");
         const getData = JSON.parse(response.data);
         setData(getData);
-        const newMarkers = getData.map((data) => ({ lat: data.fields.latitude, lng: data.fields.longitude }));
+        const newMarkers = getData.map((data) => ({ lat: data.fields.latitude, lng: data.fields.longitude, color: `rgb(128, 0, 128)`,name: `CS${data.pk}`, id:data.pk}));
         setMarkers(newMarkers);
         const totalMarkers = getData.length;
         const totalLat = getData.reduce((sum, station) => sum + station.fields.latitude, 0);
@@ -35,7 +39,7 @@ const SwapStation = ({ selectedOption }) => {
 
   return (
     
-          <Map center={defaultCenter} zoom={defaultZoom} markers={markers}/>
+          <Map center={defaultCenter} zoom={defaultZoom} markers={markers} click={click}/>
         
   );
 }

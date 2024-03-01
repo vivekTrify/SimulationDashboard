@@ -3,63 +3,41 @@ import axios from 'axios';
 import MapPath from '../map/MapPath';
 import { useJourney } from '../../context/JourneyContext';
 
-function Journey({}) {
+function Journey({clickData}) {
+  const {  getJourney } = useJourney();
+  // const fromVehicleID = clickData?.fromVehicleID ? clickData.fromVehicleID : false;
+  // clickData = {};
 
-  const { journeyDates, dateJourneyCounts } = useJourney();
-  console.log(journeyDates);
-  console.log(dateJourneyCounts);
+  const [journeys, setJourneys]= useState([]);
+  const journeyData = getJourney;
+  console.log(journeyData);
 
-    // const [data, setData] = useState([]);
-    // const Journey_URL = 'http://dev-api.trify.us/api/admin/vehicle_journey/';
-    // const  params = {
-    //     "start_date": "2023-01-01",
-    //     "end_date": "2025-12-31",
-    //     "step": "5",
-    //     "vehicle_id": "1",
-    // }
+  useEffect(()=>{
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //       try {
-    //         // const response = await axios.get(Journey_URL, { params });
-    //         const response = await axios.get("https://dev-api.trify.us/api/rider/vehicle_journeys/1/");
-    //         const getData = response.data; // No need to parse JSON if response.data is already parsed
-    //         setData(getData);
-    //         console.log(getData); // Log the fetched data, not the state variable 'data'
-    //       } catch (error) {
-    //         console.error('Error fetching data:', error);
-    //       }
-    //     };
-      
-    //     fetchData();
-    //   }, []);
+    setJourneys(journeyData?journeyData:[]);
+  },[journeyData])
 
-      // const journeyData = data;
+  
+  console.log(journeys)
+  
+ 
+  
+  
+  
 
-      // const journeys = Object.entries(journeyData).map(([key, waypoints]) => ({
-      //   color: '#' + Math.floor(Math.random()*16777215).toString(16), // Generate random color
-      //   waypoints: waypoints.map(({ lat, long }) => ({ lat, lng: long }))
-      // }));
 
-  return (
    
-<>
-
-<ul>
-  {
-journeyDates.map((date)=>
-<li>
-{date}----- total Journey: {dateJourneyCounts[date].length}
-</li>
+  return (
+   <>
+        {/* {fromVehicleID ? <MapPath journeys={journeys} />  : <MapPath journeys={journeys} />} */}
+        <MapPath journeys={journeys} />
+   </>
 
 
-)
-  }
 
-</ul>
           
         
-</>
+
 
         
         
