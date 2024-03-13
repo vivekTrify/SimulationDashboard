@@ -7,6 +7,9 @@ import LogoImage from "../../../assets/TrifyLogo.png";
 import { useMarkerContext} from '../../../context/MarkerContext';
 import DetailsCard from "./DetailsCard";
 import VehicleDetailsCard from "./DetailsCard/VehicleDetailsCard";
+import LocationDetailsCard from "./DetailsCard/LocationDetailsCard";
+import SwapStationDetailsCard from "./DetailsCard/SwapStationDetailsCard";
+import JourneyDetailsCard from "./DetailsCard/JourneyDetailsCard";
 
 
 function SideCard({click, clickData}) {
@@ -54,12 +57,17 @@ function SideCard({click, clickData}) {
             <Row>
               <Card.Body>
                 <Row className="p-3" >
-                
-                  <Card.Title><h2>
+                  <Col className="col-9"><Card.Title><h3>
                       Total {selectedOption} List
-                    </h2> 
+                    </h3> 
                 </Card.Title>
-                  <Row >
+                  </Col>
+                  <Col className="d-flex justify-content-end col-3">
+                    <Button onClick={handleAllClick} className="align-self-end"> <h5>All</h5></Button>
+                    </Col>
+                
+                  
+                  {/* <Row >
                     <Col>
                     <Row>
                     <h5>Total Count : {TotalLocation.length}</h5>
@@ -72,18 +80,17 @@ function SideCard({click, clickData}) {
                     <Col className="d-flex justify-content-end">
                     <Button onClick={handleAllClick} className="align-self-end"> <h5>All</h5></Button>
                     </Col>
-                  </Row>
+                  </Row> */}
                 </Row>
                 <Row className="p-3">
-                  {/* {
-                    List.map((list)=>
-                    <DetailsCard data={DetailsData}/>
-                    
-                    )
-                  } */}
-                  {selectedOption === null && clickData && <DetailsCard data={clickData} />}
-                  {selectedOption === "Locations" && clickData && <DetailsCard data={clickData} />}
-                  {selectedOption === "Vehicle" && clickData && <VehicleDetailsCard data={clickData} />}
+                  {selectedOption === null && clickData && !clickData.markerClicked && <DetailsCard data={clickData} />}
+                  {selectedOption === "Locations" && clickData && !clickData.markerClicked && <DetailsCard data={clickData} />}
+                  {selectedOption === "Locations" && clickData && clickData.markerClicked && <LocationDetailsCard data={clickData} />}
+                  {selectedOption === null && clickData && clickData.markerClicked && <LocationDetailsCard data={clickData} />}
+                  {selectedOption === "Vehicle" && clickData && <VehicleDetailsCard data={clickData} click={click} />}
+                  {selectedOption === "SwapStation" && clickData && <SwapStationDetailsCard data={clickData} click={click} />}
+                  {selectedOption === "Journey" && clickData && clickData.clicked && <JourneyDetailsCard data={clickData} click={click} />}
+
                 </Row>
                 
                 

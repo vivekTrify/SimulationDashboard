@@ -3,21 +3,38 @@ import { withGoogleMap, GoogleMap, DirectionsRenderer } from 'react-google-maps'
 
 function MapPath({ journeys }) {
   const [directions, setDirections] = useState(null);
+  console.log(journeys)
 
   useEffect(() => {
     if (journeys.length === 0) return;
 
     const waypoints = journeys.map(journey => ({
-      location: { lat: journey.waypoints[0].lat, lng: journey.waypoints[0].lng },
+      location: { lat: parseFloat(journey.latitude), lng: parseFloat(journey.longitude) },
       stopover: true
     }));
+    console.log(waypoints[0].location);
 
     const directionsService = new window.google.maps.DirectionsService();
 
+    const totalWaypoints = waypoints;
+    const totalLength = totalWaypoints.length;
+    const batchSize = 25;
+    const step = Math.floor(totalLength / batchSize); // Calculate step size
+
+const selectedWaypoints = [];
+let currentIndex = 0;
+
+for (let i = 0; i < batchSize; i++) {
+  selectedWaypoints.push(totalWaypoints[currentIndex]);
+  currentIndex += step;
+}
+
+console.log(selectedWaypoints);
+
     const request = {
-      origin: waypoints[0].location,
-      destination: waypoints[waypoints.length - 1].location,
-      waypoints: waypoints.slice(1, -1),
+      origin: selectedWaypoints[0].location,
+      destination: selectedWaypoints[selectedWaypoints.length - 1].location,
+      waypoints: selectedWaypoints.slice(1, -1),
       travelMode: 'DRIVING'
     };
 

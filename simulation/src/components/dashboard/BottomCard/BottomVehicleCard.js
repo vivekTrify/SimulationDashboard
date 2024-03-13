@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Card,Col } from 'react-bootstrap';
 
-function BottomVehicleCard({click, clickData}) {
+function BottomVehicleCard({click}) {
 
     const [data, setData] = useState([]);
 
@@ -26,8 +26,7 @@ function BottomVehicleCard({click, clickData}) {
     const handleCardClick = (data) => {
 
         click(data);
-        // const dataD = click(data);
-        console.log(clickData);
+        
 
     };
   return (

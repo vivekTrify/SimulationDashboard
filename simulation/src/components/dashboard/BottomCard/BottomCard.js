@@ -5,16 +5,17 @@ import { useHorizontalScroll } from '../../../Hooks/UseHorizontalScroll';
 import { useDropdown } from "../../../context/DropdownContext";
 import BottomLocationCard from './BottomLocationCard';
 import BottomVehicleCard from './BottomVehicleCard';
+import BottomJourneyCard from './BottomJourneyCard';
 
-function BottomCard({click,clickData}) {
+
+function BottomCard({click}) {
+
 
 
   const { selectedOption } = useDropdown();
   const containerRef = useHorizontalScroll();
-  console.log(clickData);
-   
+  // console.log(clickData);   
   
-
   return (
  
     <Container fluid ref={containerRef}
@@ -23,7 +24,8 @@ function BottomCard({click,clickData}) {
     <Row className='flex-nowrap'>
     {selectedOption === null && <BottomLocationCard click={click} />}
     {selectedOption === "Locations" && <BottomLocationCard click={click} />}
-    {selectedOption === "Vehicle"  &&  <BottomVehicleCard click={click} clickData={clickData}/>}
+    {selectedOption === "Vehicle"  &&  <BottomVehicleCard click={click} />}
+    {selectedOption === "Journey" &&   <BottomJourneyCard click={click} />}
       
     </Row>
   </Container>

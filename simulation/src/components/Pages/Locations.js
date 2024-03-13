@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Map from '../map/Map';
 import { useMarkerContext } from '../../context/MarkerContext';
 
-const Locations = ({ selectedOption }) => {
+const Locations = ({ click, selectedOption }) => {
 
   const [defaultCenter, setDefaultCenter] = useState({ lat: 12.9716, lng: 77.5946 });
   const [defaultZoom, setDefaultZoom] = useState(12);
@@ -21,12 +21,12 @@ const Locations = ({ selectedOption }) => {
       setDefaultCenter({ lat: avgLat, lng: avgLng });
     }
   }, [markers]);
-  console.log(markers)
+  // console.log(markers)
 
 
   return (
     
-          <Map center={defaultCenter} zoom={defaultZoom} markers={markers} />
+          <Map center={defaultCenter} zoom={defaultZoom} markers={markers} click={click} />
 
         
   );

@@ -7,8 +7,15 @@ function getRandomColor() {
 }
 
 
-function Map({ center, zoom, markers }) {
+function Map({ center, zoom, markers, click }) {
   const mapRef = useRef(null);
+
+  const handleMarkerClick = (marker) => {
+    // Your logic when a marker is clicked
+    marker.markerClicked = true;
+    click(marker);
+    // console.log('Marker clicked:', marker,click);
+  }
 
   useEffect(() => {
     if (markers.length === 0 || !mapRef.current) return;
@@ -43,6 +50,7 @@ function Map({ center, zoom, markers }) {
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(20, 40)
             }}
+            onClick={() => handleMarkerClick(marker)}
             
           />
           );
